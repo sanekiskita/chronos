@@ -56,6 +56,21 @@ describe('mixins', () => {
       expect(result1).toBe('done');
       expect(result2).toEqual(new Error('Function is already running'));
     });
+
+    it('should use custom rejection value', async () => {
+      const mockFn = jest.fn().mockImplementation(() => new Promise(res => setTimeout(() => res('done'), 50)));
+      const customError = 'Custom busy message';
+      const wrapped = mixins.onceAtATime(mockFn, customError);
+
+      const first = wrapped();
+      const second = wrapped().catch(e => e);
+
+      const result1 = await first;
+      const result2 = await second;
+
+      expect(result1).toBe('done');
+      expect(result2).toBe(customError);
+    });
   });
 
   describe('throttle', () => {
@@ -70,6 +85,29 @@ describe('mixins', () => {
       throttled('c');
 
       expect(mockFn).toHaveBeenCalledTimes(2);
+
+      jest.useRealTimers();
+    });
+
+    it('should handle function errors gracefully', () => {
+      const mockFn = jest.fn(() => { throw new Error('Test error'); });
+      const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+      const throttled = mixins.throttle(mockFn, 100);
+
+      // Should not throw error, just log it
+      expect(() => throttled('test')).not.toThrow();
+      expect(consoleSpy).toHaveBeenCalledWith('Throttled function error:', expect.any(Error));
+
+      consoleSpy.mockRestore();
+    });
+
+    it('should pass arguments correctly', () => {
+      jest.useFakeTimers();
+      const mockFn = jest.fn();
+      const throttled = mixins.throttle(mockFn, 100);
+
+      throttled('arg1', 'arg2');
+      expect(mockFn).toHaveBeenCalledWith('arg1', 'arg2');
 
       jest.useRealTimers();
     });

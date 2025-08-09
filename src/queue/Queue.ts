@@ -8,7 +8,6 @@ class Queue extends AQueue<IQueueTask[]> implements IQueue {
 
   constructor() {
     super();
-    this.queues = [];
   }
 
   protected _getQueue() {

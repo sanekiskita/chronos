@@ -8,7 +8,6 @@ class QueuePriority extends AQueue<Record<IPriority, IQueueTask[]>> implements I
     normal: [],
     low: [],
   };
-  protected validPriorities: IPriority[] = ['high', 'normal', 'low'];
 
   protected _getQueue() {
     if (this.queues.high.length) {
@@ -29,7 +28,7 @@ class QueuePriority extends AQueue<Record<IPriority, IQueueTask[]>> implements I
   add(task: AnyFunc, priority: IPriority = "normal") {
     return new Promise((resolve, reject) => {
 
-      if (!this.validPriorities.includes(priority)) {
+      if (!(priority in this.queues)) {
         console.error(`Invalid priority: ${priority}`);
         priority = 'normal';
       }

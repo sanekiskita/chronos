@@ -58,7 +58,7 @@ const mixins = {
   
     return async function (...args: Parameters<AnyFunc>): Promise<ReturnType<AnyFunc>> {
       if (isRunning) {
-        return await Promise.reject(rejectOnce);
+        return Promise.reject(rejectOnce);
       }
 
       isRunning = true;
@@ -87,7 +87,11 @@ const mixins = {
       const now = Date.now();
       if (now - lastCall >= limit) {
         lastCall = now;
-        func(...args);
+        try {
+          func(...args);
+        } catch (error) {
+          console.error('Throttled function error:', error);
+        }
       }
     };
   },
