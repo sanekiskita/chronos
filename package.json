@@ -1,0 +1,36 @@
+{
+  "name": "boom/@chronos",
+  "version": "0.1.0",
+  "main": "index.js",
+  "module": "build/esm/index.js",
+  "types": "build/types/index.d.ts",
+  "files": [
+    "build"
+  ],
+  "exports": {
+    ".": {
+      "import": "./build/esm/index.js",
+      "require": "./build/cjs/index.js"
+    }
+  },
+  "scripts": {
+    "dev": "rollup --config --watch",
+    "build": "rollup --config",
+    "test": "jest"
+  },
+  "author": "sanekiskita",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.6",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^12.1.4",
+    "@types/jest": "^30.0.0",
+    "jest": "^30.0.5",
+    "rollup": "^4.46.2",
+    "ts-jest": "^29.4.1",
+    "tslib": "^2.8.1",
+    "typescript": "^5.9.2"
+  }
+}
