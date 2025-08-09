@@ -1,5 +1,5 @@
 {
-  "name": "boom/@chronos",
+  "name": "@boom/chronos",
   "version": "0.1.0",
   "main": "index.js",
   "module": "build/esm/index.js",
