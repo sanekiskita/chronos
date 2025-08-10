@@ -28,7 +28,7 @@ export default abstract class AQueue<T extends any> {
 
   protected _processQueue(): void {
     // Wait for all synchronous tasks to be added before processing
-    setTimeout(() => {
+    Promise.resolve().then(() => {
       // Process as many tasks as concurrency allows
       while (this._canRunProcess()) {
         const queue = this._getQueue();
@@ -37,7 +37,7 @@ export default abstract class AQueue<T extends any> {
         }
         this._runProcess(queue);
       }
-    }, 0);
+    });
   }
 
   public getActiveCount() {
