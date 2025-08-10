@@ -103,7 +103,7 @@ class AQueue {
     }
     _processQueue() {
         // Wait for all synchronous tasks to be added before processing
-        setTimeout(() => {
+        Promise.resolve().then(() => {
             // Process as many tasks as concurrency allows
             while (this._canRunProcess()) {
                 const queue = this._getQueue();
@@ -112,7 +112,7 @@ class AQueue {
                 }
                 this._runProcess(queue);
             }
-        }, 0);
+        });
     }
     getActiveCount() {
         return this.activeCount;

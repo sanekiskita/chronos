@@ -1,4 +1,4 @@
-# Boom/@chronos
+# @Boom/chronos
 
 A TypeScript library providing utility mixins and queue implementations for asynchronous task management.
 
@@ -28,7 +28,7 @@ npm install git+https://github.com/sanekiskita/chronos.git
 Delays function execution until `wait` milliseconds have passed since the last call:
 
 ```typescript
-import { mixins } from 'boom/@chronos';
+import { mixins } from '@boom/chronos';
 
 const debouncedSearch = mixins.debounce(
   (query: string) => fetch(`/api/search?q=${query}`),
@@ -87,7 +87,7 @@ window.addEventListener('scroll', throttledHandler);
 Sequential task execution:
 
 ```typescript
-import { Queue } from 'boom/@chronos';
+import { Queue } from '@boom/chronos';
 
 const queue = new Queue();
 
@@ -102,7 +102,7 @@ queue.add(() => fetch('/api/task3'));
 Concurrent task execution with configurable limits:
 
 ```typescript
-import { QueueParallel } from 'boom/@chronos';
+import { QueueParallel } from '@boom/chronos';
 
 const parallelQueue = new QueueParallel(3); // Max 3 concurrent tasks
 
@@ -118,7 +118,7 @@ parallelQueue.add(() => fetch('/api/task4'));
 Task execution based on priority levels:
 
 ```typescript
-import { QueuePriority } from 'boom/@chronos';
+import { QueuePriority } from '@boom/chronos';
 
 const priorityQueue = new QueuePriority();
 

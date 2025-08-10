@@ -3,7 +3,6 @@ import { IQueuePriority, IQueueTask, IPriority } from "../interface/IQueue";
 import AQueue from "./QueueAbstract";
 declare class QueuePriority extends AQueue<Record<IPriority, IQueueTask[]>> implements IQueuePriority {
     protected queues: Record<IPriority, IQueueTask[]>;
-    protected validPriorities: IPriority[];
     protected _getQueue(): IQueueTask | undefined;
     add(task: AnyFunc, priority?: IPriority): Promise<unknown>;
     clear(priority?: IPriority): void;
