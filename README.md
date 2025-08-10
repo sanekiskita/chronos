@@ -17,7 +17,7 @@ A TypeScript library providing utility mixins and queue implementations for asyn
 ## Installation
 
 ```bash
-npm install boom/@chronos
+npm install git+https://github.com/sanekiskita/chronos.git
 ```
 
 ## Usage
